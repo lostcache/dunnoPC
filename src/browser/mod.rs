@@ -1,1 +1,2 @@
-pub(crate) mod brave;
+pub(crate) mod chromium;
+pub(crate) use chromium::Chromium;

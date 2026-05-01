@@ -23,11 +23,20 @@ pub(crate) enum AppCommands {
 #[derive(clap::Subcommand, Debug)]
 pub(crate) enum BrowserCommands {
     ListPages,
-    GetPageContent,
+    GetPageContent {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+    },
     FindPageElement,
     FindPageElements,
     PageElementInputStr,
-    OpenPage { url: String },
+    OpenPage {
+        url: String,
+    },
     ClosePage,
     // etc.
 }
