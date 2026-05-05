@@ -121,15 +121,32 @@ impl Chromium {
             .context("Something went wrong while finding elements")
     }
 
-    /// pub(crate) async fn page_element_click(
-    ///     page: chromiumoxide::Page,
-    ///     sel: String,
-    /// ) -> anyhow::Result<&chromiumoxide::Element, anyhow::Error> {
-    ///     let ele = page_find_element(page, sel).await?;
-    ///     ele.click()
-    ///         .await
-    ///         .context("Something went wrong while clicking element")
-    /// }
+    pub(crate) async fn page_element_click(
+        &mut self,
+        page_info: PageInfo,
+        sel: String,
+    ) -> anyhow::Result<()> {
+        let ele = self.page_find_element(page_info, sel).await?;
+        ele.click()
+            .await
+            .context("Something went wrong while clicking element")?;
+        Ok(())
+    }
+
+    pub(crate) async fn page_navigate(
+        &mut self,
+        page_info: PageInfo,
+        url: &str,
+    ) -> anyhow::Result<()> {
+        let page = self.get_page(page_info).await?;
+        page.goto(url).await.context("Couldn't navigate to URL")?;
+        Ok(())
+    }
+
+    pub(crate) async fn close_page(&mut self, page_info: PageInfo) -> anyhow::Result<()> {
+        let page = self.get_page(page_info).await?;
+        page.close().await.context("Couldn't close page")
+    }
 
     pub(crate) async fn page_element_type_str(
         &mut self,

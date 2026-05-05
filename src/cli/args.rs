@@ -33,10 +33,49 @@ pub(crate) enum BrowserCommands {
     },
     FindPageElement,
     FindPageElements,
-    PageElementInputStr,
+    PageElementInputStr {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+        #[arg(short, long)]
+        sel: String,
+        #[arg(short, long)]
+        value: String,
+    },
     OpenPage {
+        #[arg(short, long)]
         url: String,
     },
-    ClosePage,
+    ClosePage {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+    },
+    NavigatePage {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+        #[arg(short = 'n', long)]
+        to: String,
+    },
+    ClickElement {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+        #[arg(short, long)]
+        sel: String,
+    },
     // etc.
 }
