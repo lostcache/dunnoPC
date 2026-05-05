@@ -31,8 +31,26 @@ pub(crate) enum BrowserCommands {
         #[arg(short, long, num_args(0..=1))]
         title: Option<String>,
     },
-    FindPageElement,
-    FindPageElements,
+    FindPageElement {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+        #[arg(short, long)]
+        sel: String,
+    },
+    FindPageElements {
+        #[arg(short, long, num_args(0..=1))]
+        id: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        url: Option<String>,
+        #[arg(short, long, num_args(0..=1))]
+        title: Option<String>,
+        #[arg(short, long)]
+        sel: String,
+    },
     PageElementInputStr {
         #[arg(short, long, num_args(0..=1))]
         id: Option<String>,

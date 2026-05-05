@@ -16,8 +16,28 @@ pub(crate) async fn action(args: cli::Args) -> anyhow::Result<()> {
                         .await;
                     println!("{:?}", content);
                 }
-                cli::BrowserCommands::FindPageElement => {}
-                cli::BrowserCommands::FindPageElements => {}
+                cli::BrowserCommands::FindPageElement {
+                    id,
+                    url,
+                    title,
+                    sel,
+                } => {
+                    let element = browser
+                        .page_find_element(browser::PageInfo { id, url, title }, sel)
+                        .await?;
+                    println!("{:?}", element);
+                }
+                cli::BrowserCommands::FindPageElements {
+                    id,
+                    url,
+                    title,
+                    sel,
+                } => {
+                    let elements = browser
+                        .page_find_elemets(browser::PageInfo { id, url, title }, sel)
+                        .await?;
+                    println!("{:?}", elements);
+                }
                 cli::BrowserCommands::PageElementInputStr {
                     id,
                     url,
